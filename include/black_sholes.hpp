@@ -12,9 +12,14 @@ class BlackSholes {
         static double d1(const Option& option);
 
         static double d2(const Option& option);
-        
+
+        static double putPrice(const Option& option);
+
+        static double callPrice(const Option& option);
+
         static double price(const Option& option);
 
+        static double errorCP(const Option& option, double C, double P);
 };
 
 

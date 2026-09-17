@@ -17,9 +17,22 @@ double BlackSholes::d2(const Option& o) {
     return d1(o) - (o.getSigma() * sqrt(o.getT()));
 }
         
-double BlackSholes::price(const Option& o) {
-    if (o.getType() == typeoption::CALL) {
-        return o.getS0() * N(d1(o)) - o.getK() * exp(-o.getR() * o.getT()) * N(d2(o));
-    }
+double BlackSholes::putPrice(const Option& o) {
     return o.getK() * exp(- o.getR() * o.getT()) * N(-d2(o)) - o.getS0() * N(-d1(o));
 }
+
+double BlackSholes::callPrice(const Option& o) {
+    return o.getS0() * N(d1(o)) - o.getK() * exp(-o.getR() * o.getT()) * N(d2(o));
+}
+
+double BlackSholes::price(const Option& o) {
+    if (o.getType() == typeoption::CALL) {
+        return callPrice(o);
+    }
+    return putPrice(o);
+}
+
+double BlackSholes::errorCP(const Option& o, double C, double P) {
+    return abs((C - P) - (o.getS0() -  o.getK() * exp(-o.getR() * o.getT()) ));
+}
+
