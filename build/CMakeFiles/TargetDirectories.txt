@@ -1,0 +1,2 @@
+/home/katana/Documents/Projects/Pricing Engine/build/CMakeFiles/edit_cache.dir
+/home/katana/Documents/Projects/Pricing Engine/build/CMakeFiles/rebuild_cache.dir
