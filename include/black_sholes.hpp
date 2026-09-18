@@ -7,19 +7,19 @@
 
 class BlackSholes {
     public:
-        static double N(double x);
+        static long double N(long double x);
 
-        static double d1(const Option& option);
+        static long double d1(const Option& option);
 
-        static double d2(const Option& option);
+        static long double d2(const Option& option);
 
-        static double putPrice(const Option& option);
+        static long double putPrice(const Option& option);
 
-        static double callPrice(const Option& option);
+        static long double callPrice(const Option& option);
 
-        static double price(const Option& option);
+        static long double price(const Option& option);
 
-        static double errorCP(const Option& option, double C, double P);
+        static long double errorCP(const Option& option, long double C, long double P);
 };
 
 

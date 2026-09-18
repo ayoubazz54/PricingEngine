@@ -8,11 +8,11 @@ enum class typeoption {
 };
 
 struct parameters {
-    double S0;
-    double K;
-    double T;
-    double r;
-    double sigma;
+    long double S0;
+    long double K;
+    long double T;
+    long double r;
+    long double sigma;
 };
 
 typedef struct parameters parameters;
@@ -24,11 +24,11 @@ class Option {
     public:
         Option(parameters par, typeoption type);
         ~Option();
-        double getS0() const;
-        double getK() const;
-        double getT() const;
-        double getR() const;
-        double getSigma() const;
+        long double getS0() const;
+        long double getK() const;
+        long double getT() const;
+        long double getR() const;
+        long double getSigma() const;
         typeoption getType() const;
         
 };

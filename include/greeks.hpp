@@ -6,23 +6,23 @@
 class Greeks {
     public: 
         /* La densité de la loi normale. */
-        static double phi(double);
+        static long double phi(long double);
 
-        static double deltaC(const Option&);
+        static long double deltaC(const Option&);
 
-        static double deltaP(const Option&);
+        static long double deltaP(const Option&);
 
-        static double gamma(const Option&);
+        static long double gamma(const Option&);
 
-        static double vega(const Option&);
+        static long double vega(const Option&);
 
-        static double rhoC(const Option&);
+        static long double rhoC(const Option&);
 
-        static double rhoP(const Option&);
+        static long double rhoP(const Option&);
 
-        static double thetaC(const Option&);
+        static long double thetaC(const Option&);
 
-        static double thetaP(const Option&);
+        static long double thetaP(const Option&);
 
 };
 

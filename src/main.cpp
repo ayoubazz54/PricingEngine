@@ -2,6 +2,7 @@
 #include "../include/option.hpp"
 #include "../include/black_sholes.hpp"
 #include "../include/greeks.hpp"
+#include "../include/crr.hpp"
 
 int main() {
     parameters par;
@@ -11,17 +12,23 @@ int main() {
     par.r = 0.05;
     par.sigma = 0.20;
 
+    int n = 50;
+
     Option C = Option(par, typeoption::CALL);
     Option P = Option(par, typeoption::PUT);
 
+    long double priceC_BS = BlackSholes::price(C);
+    long double priceP_BS = BlackSholes::price(P);
+
+    std::cout << "Black-Sholes model: " << std::endl;
     std::cout << "Le prix de l'option call est: "
-    << BlackSholes::price(C) << ". " << std::endl;
+    << priceC_BS << ". " << std::endl;
 
     std::cout << "Le prix de l'option put est: "
-    << BlackSholes::price(P) << ". " << std::endl;
+    << priceP_BS << ". " << std::endl;
 
-    std::cout << "L'erreur du calcul: "
-    << BlackSholes::errorCP(C, BlackSholes::price(C), BlackSholes::price(P)) << std::endl;
+    std::cout << "L'erreur du calcul (C - P) - (S0 - Ke^(-rT)): "
+    << BlackSholes::errorCP(C, priceC_BS, priceP_BS) << std::endl;
 
     std::cout << "Maintenant calculant les greeks," << std::endl;
 
@@ -41,4 +48,26 @@ int main() {
     << ", Vega: " << Greeks::vega(P)
     << ", Rho: " << Greeks::rhoP(P) << std::endl;
 
+
+    // pour le modèle binomiale:
+    std::cout << "Cox-Ross-Rubinstein model: " << std::endl;
+    std::cin >> n;
+    
+    long double priceC_CRR = CRR::price(C, n);
+    long double priceP_CRR = CRR::price(P, n);
+
+    std::cout << "Le prix de l'option call est: "
+    << priceC_CRR << ". " << std::endl;
+
+    std::cout << "Le prix de l'option put est: "
+    << priceP_CRR << ". " << std::endl;
+
+    std::cout << "L'erreur du calcul (C - P) - (S0 - Ke^(-rT)): "
+    << BlackSholes::errorCP(C, priceC_CRR, priceP_CRR) << std::endl;
+
+    std::cout << "L'erreur Vbs - Vccr (Call): "
+    << priceC_BS - priceC_CRR << std::endl;
+
+    std::cout << "L'erreur Vbs - Vccr (put): "
+    << priceP_BS - priceP_CRR << std::endl;
 }
