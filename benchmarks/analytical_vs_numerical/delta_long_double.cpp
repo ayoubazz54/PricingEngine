@@ -16,17 +16,16 @@ int main() {
     par1.sigma = 0.20;
 
     Option C1 = Option(par1, typeoption::CALL);
-    double gammaAnalytic = Greeks::gamma(C1);
+    long double deltaAnalytic = Greeks::deltaC(C1);
 
     std::cout << std::fixed << std::setprecision(15);
-    std::cout << "Gammas analytique: " << gammaAnalytic << std::endl;
-    std::cout << "Gammas numeriques: " << std::endl;
+    std::cout << "Delta analytique: " << deltaAnalytic << std::endl;
+    std::cout << "Deltas numeriques: " << std::endl;
 
-    double V = BlackSholes::price(C1);
-    double h;
-    double gammaNumeric;
+    long double h;;
+    long double deltaNumeric;
     parameters par2 = par1;
-    double V1, V2;
+    long double V1, V2;
 
     for (int i = 1; i < 15; i++) {
         h = pow(10, -i);
@@ -35,10 +34,10 @@ int main() {
         V1 = BlackSholes::price(Option(par1, typeoption::CALL));
         V2 = BlackSholes::price(Option(par2, typeoption::CALL));
 
-        gammaNumeric = (V1 - 2*V + V2) / (h * h);
+        deltaNumeric = (V1 - V2) / (2 * h);
 
-        std::cout << "h = " << h << ", gamma = " <<  gammaNumeric
-        << ", l'erreur = " << gammaNumeric - gammaAnalytic
+        std::cout << "h = " << h << ", delta = " <<  deltaNumeric
+        << ", l'erreur = " << deltaNumeric - deltaAnalytic
         << std::endl;
     }
 }

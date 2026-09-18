@@ -16,17 +16,17 @@ int main() {
     par1.sigma = 0.20;
 
     Option C1 = Option(par1, typeoption::CALL);
-    double gammaAnalytic = Greeks::gamma(C1);
+    long double gammaAnalytic = Greeks::gamma(C1);
 
     std::cout << std::fixed << std::setprecision(15);
     std::cout << "Gammas analytique: " << gammaAnalytic << std::endl;
     std::cout << "Gammas numeriques: " << std::endl;
 
-    double V = BlackSholes::price(C1);
-    double h;
-    double gammaNumeric;
+    long double V = BlackSholes::price(C1);
+    long double h;
+    long double gammaNumeric;
     parameters par2 = par1;
-    double V1, V2;
+    long double V1, V2;
 
     for (int i = 1; i < 15; i++) {
         h = pow(10, -i);
