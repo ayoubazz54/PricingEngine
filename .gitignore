@@ -27,3 +27,5 @@ install_manifest.txt
 *.tmp
 *.swp
 *~
+
+.venv/
