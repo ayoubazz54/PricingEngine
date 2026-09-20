@@ -3,6 +3,7 @@
 #include "../include/black_sholes.hpp"
 #include "../include/greeks.hpp"
 #include "../include/crr.hpp"
+#include "../include/monte_carlo.hpp"
 
 int main() {
     parameters par;
@@ -13,6 +14,7 @@ int main() {
     par.sigma = 0.20;
 
     int n = 50;
+    int M;
 
     Option C = Option(par, typeoption::CALL);
     Option P = Option(par, typeoption::PUT);
@@ -70,4 +72,26 @@ int main() {
 
     std::cout << "L'erreur Vbs - Vccr (put): "
     << priceP_BS - priceP_CRR << std::endl;
+
+    // pour le modèle monte carlo:
+    std::cout << "using Monte Carlo: " << std::endl;
+    std::cin >> M;
+    
+    long double priceC_MC = MonteCarlo::price(C, M);
+    long double priceP_MC = MonteCarlo::price(P, M);
+
+    std::cout << "Le prix de l'option call est: "
+    << priceC_MC << ". " << std::endl;
+
+    std::cout << "Le prix de l'option put est: "
+    << priceP_MC << ". " << std::endl;
+
+    std::cout << "L'erreur du calcul (C - P) - (S0 - Ke^(-rT)): "
+    << BlackSholes::errorCP(C, priceC_MC, priceP_MC) << std::endl;
+
+    std::cout << "L'erreur Vbs - Vmc (Call): "
+    << priceC_BS - priceC_MC << std::endl;
+
+    std::cout << "L'erreur Vbs - Vmc (put): "
+    << priceP_BS - priceP_MC << std::endl;
 }
