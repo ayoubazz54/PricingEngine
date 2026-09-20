@@ -21,9 +21,16 @@ add_library(PricingCore STATIC ${ENGINE_SOURCES})
 add_executable(pricer src/main.cpp)
 target_link_libraries(pricer PRIVATE PricingCore)
 
-set(CONVERGENCE_SOURCES
+set(CONVERGENCE_SOURCES1
     benchmarks/monte_carlo/convergence.cpp
 )
 
-add_executable(convergenceMC ${CONVERGENCE_SOURCES})
+set(CONVERGENCE_SOURCES2
+    benchmarks/monte_carlo/convergence.cpp
+)
+
+add_executable(convergenceMC ${CONVERGENCE_SOURCES1})
 target_link_libraries(convergenceMC PRIVATE PricingCore)
+
+add_executable(convergenceCRR ${CONVERGENCE_SOURCES2})
+target_link_libraries(convergenceCRR PRIVATE PricingCore)

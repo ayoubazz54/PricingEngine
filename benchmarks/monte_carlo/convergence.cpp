@@ -1,5 +1,7 @@
 #include "../../include/monte_carlo.hpp"
 #include "../../include/black_sholes.hpp"
+#include "../../include/crr.hpp"
+
 
 // for streaming
 #include <iostream>
@@ -29,7 +31,7 @@ int main() {
         return 1;
     }
 
-    file << "M,price,standard_error,error,ci_low,ci_high\n";
+    file << "M,price,standard_error,error,ci_low,ci_high,time\n";
 
     const uint64_t seed = 42;
 
@@ -50,7 +52,8 @@ int main() {
              << result.standardError << "," 
              << error << ","
              << result.confidenceLow << ","
-             << result.confidenceHigh << "\n";
+             << result.confidenceHigh << ","
+             << elapsed.count() << "\n";
 
         std::cout 
             << "M = " << M
