@@ -2,7 +2,7 @@
 #include <cmath>
 #include <random>
 
-MonteCarlo::MonteCarloResult MonteCarlo::price(const Option& o, int M, unsigned long long seed) {
+MonteCarloResult MonteCarlo::price(const Option& o, int M, unsigned long long seed) {
     MonteCarloResult result;
 
     std::mt19937_64 generator(seed);

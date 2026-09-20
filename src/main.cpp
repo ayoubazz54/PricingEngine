@@ -18,8 +18,8 @@ int main() {
     int M;
     unsigned long long seed = 12345;
 
-    Option C = Option(par, typeoption::CALL);
-    Option P = Option(par, typeoption::PUT);
+    Option C(par, typeoption::CALL);
+    Option P(par, typeoption::PUT);
 
     long double priceC_BS = BlackSholes::price(C);
     long double priceP_BS = BlackSholes::price(P);
@@ -81,8 +81,8 @@ int main() {
     std::cout << "Le nombre des échantillons: " ;
     std::cin >> M;
     
-    MonteCarlo::MonteCarloResult resultC_MC = MonteCarlo::price(C, M, seed);
-    MonteCarlo::MonteCarloResult resultP_MC = MonteCarlo::price(P, M, seed);
+    MonteCarloResult resultC_MC = MonteCarlo::price(C, M, seed);
+    MonteCarloResult resultP_MC = MonteCarlo::price(P, M, seed);
 
     long double priceC_MC = resultC_MC.price;
     long double priceP_MC = resultP_MC.price;

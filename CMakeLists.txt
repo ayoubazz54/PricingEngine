@@ -1,13 +1,29 @@
-add_executable(pricing_engine
-    src/main.cpp
+cmake_minimum_required(VERSION 3.12)
+
+project(PricingEngine CXX)
+
+set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD_REQUIRED ON)
+set(CMAKE_CXX_EXTENSIONS OFF)
+
+include_directories(include)
+
+set(ENGINE_SOURCES
     src/option.cpp
-    src/black_scholes.cpp
+    src/black_sholes.cpp
+    src/greeks.cpp
+    src/crr.cpp
+    src/monte_carlo.cpp
 )
 
+add_library(PricingCore STATIC ${ENGINE_SOURCES})
 
-add_executable(delta
-    benchmarks/analytical_vs_numerical/delta.cpp
+add_executable(pricer src/main.cpp)
+target_link_libraries(pricer PRIVATE PricingCore)
+
+set(CONVERGENCE_SOURCES
+    benchmarks/monte_carlo/convergence.cpp
 )
 
-add_executable(gamma
-    benchmarks/analytical_vs_numerical/gamma.cpp)
+add_executable(convergenceMC ${CONVERGENCE_SOURCES})
+target_link_libraries(convergenceMC PRIVATE PricingCore)
