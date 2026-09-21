@@ -46,7 +46,8 @@ print("Graphique sauvegardé avec succès sous : crr_convergence.png")
 fig, ax = plt.subplots(figsize=(8, 6))
 
 ax.loglog(df_CRR["time"], df_CRR["error"], marker="s", linestyle="--", label="Erreur Absolue (CRR vs Black-Scholes)")
-ax.loglog(df_MC["time"], df_MC["error"], marker="s", linestyle="--", label="Erreur Absolue (MC vs Black-Scholes)")
+ax.loglog(df_MC["time"], df_MC["error"], marker="s", linestyle="--", label="Erreur Absolue (MC vs Black-Scholes)1")
+ax.loglog(df_MC1234["time"], df_MC1234["error"], marker="s", linestyle="--", label="Erreur Absolue (MC vs Black-Scholes)2")
 
 ax.set_xlabel("temps consommé (par second)")
 ax.set_ylabel("Erreur")
