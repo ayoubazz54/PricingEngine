@@ -21,7 +21,8 @@ int main() {
 
     long double exactPrice = BlackSholes::price(option);
 
-    std::vector<int> numbersOfSteps = { 100, 1000, 10000, 100000 };
+    std::vector<int> numbersOfSteps = { 10, 25, 50, 101, 200, 351, 600, 1001, 2000, 4001, 7500, 15001, 30000 };
+                                    
     std::ofstream file("crr_convergence.csv");
 
     if (!file.is_open()) {
@@ -29,9 +30,10 @@ int main() {
         return 1;
     }
 
-    file << "n,price,error,time\n";
+    file << "n,price,error,time,exactprice\n";
 
-    std::cout << std::fixed << std::setprecision(10);
+    std::cout << std::fixed << std::setprecision(15);
+    file << std::fixed << std::setprecision(15);
 
     for (int n : numbersOfSteps) {
 
@@ -46,7 +48,8 @@ int main() {
         file << n << ","
              << priceCRR << ","
              << error << ","
-             << elapsed.count() << "\n";
+             << elapsed.count() << ","
+             << exactPrice << "\n";
 
         std::cout 
             << "n = " << n
