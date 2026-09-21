@@ -24,7 +24,7 @@ int main() {
     long double exactPrice = BlackSholes::price(option);
 
     std::vector<int> simulations = { 1000, 10000, 100000, 1000000, 10000000, 100000000};
-    std::ofstream file("monte_carlo_convergence.csv");
+    std::ofstream file("monte_carlo_convergence_1234.csv");
 
     if (!file.is_open()) {
         std::cerr << "Error during CSV file opening\n";
@@ -33,7 +33,7 @@ int main() {
 
     file << "M,price,standard_error,error,ci_low,ci_high,time\n";
 
-    const uint64_t seed = 42;
+    const uint64_t seed = 1234;
 
     std::cout << std::fixed << std::setprecision(10);
 

@@ -36,24 +36,13 @@ MonteCarloResult MonteCarlo::price(const Option& o, int M, unsigned long long se
         }
         
         mean += discount * payoff;
+        variance += pow(discount * payoff, 2);
     }
 
-    for (int i = 0; i < M; i++) {
-        long double payoff;
-        long double Z = distribution(generator);
-        long double S = S0 * exp(drift + diffusion * Z);
+    mean = mean / M;
+    variance = (variance - M * mean * mean) / (M - 1);
 
-        if (isCall) {
-            payoff = std::max(S - K, 0.0L);
-        }
-        else {
-            payoff = std::max(K - S, 0.0L);
-        }
-        
-        variance += pow(discount * payoff - mean, 2) / (M - 1);
-    }
-
-    result.price = mean / M;
+    result.price = mean;
     result.standardError = sqrt(variance / M);
     result.confidenceHigh = result.price + 1.96L * result.standardError;
     result.confidenceLow = result.price - 1.96L * result.standardError;
