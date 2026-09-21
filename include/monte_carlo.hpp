@@ -3,6 +3,7 @@
 
 #include "option.hpp"
 
+
 struct MonteCarloResult {
     long double price;
     long double standardError;

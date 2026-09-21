@@ -4,6 +4,7 @@
 #include "../include/greeks.hpp"
 #include "../include/crr.hpp"
 #include "../include/monte_carlo.hpp"
+#include "../include/monte_carlo_parallel.hpp"
 
 
 int main() {
@@ -113,4 +114,42 @@ int main() {
 
     std::cout << "  L'intervalle de confiance pour Put: ["
     << resultC_MC.confidenceHigh << ", " << resultC_MC.confidenceLow << "]" << std::endl;
+
+    // pour le modèle monte carlo parallel:
+    std::cout << "using Monte Carlo Parallel: " << std::endl;
+    std::cout << "Le nombre des échantillons: " ;
+    std::cin >> M;
+    
+    MonteCarloResult resultC_MCP = MonteCarloParallel::price(C, M, seed, 4);
+    MonteCarloResult resultP_MCP = MonteCarloParallel::price(P, M, seed, 4);
+
+    long double priceC_MCP = resultC_MCP.price;
+    long double priceP_MCP = resultP_MCP.price;
+
+    std::cout << "  Le prix de l'option call est: "
+    << priceC_MCP << ". " << std::endl;
+
+    std::cout << "  Le prix de l'option put est: "
+    << priceP_MCP << ". " << std::endl;
+
+    std::cout << "  L'erreur du calcul (C - P) - (S0 - Ke^(-rT)): "
+    << BlackSholes::errorCP(C, priceC_MCP, priceP_MCP) << std::endl;
+
+    std::cout << "  L'erreur Vbs - Vmc (Call): "
+    << priceC_BS - priceC_MCP << std::endl;
+
+    std::cout << "  L'erreur standard pour Call: "
+    << resultC_MCP.standardError << std::endl;
+
+    std::cout << "  L'intervalle de confiance pour Call: ["
+    << resultC_MCP.confidenceHigh << ", " << resultC_MCP.confidenceLow << "]" << std::endl;
+
+    std::cout << "  L'erreur Vbs - Vmc (put): "
+    << priceP_BS - priceP_MCP << std::endl;
+
+    std::cout << "  L'erreur standard pour Put: "
+    << resultC_MCP.standardError << std::endl;
+
+    std::cout << "  L'intervalle de confiance pour Put: ["
+    << resultC_MCP.confidenceHigh << ", " << resultC_MCP.confidenceLow << "]" << std::endl;
 }
