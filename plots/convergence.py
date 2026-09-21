@@ -61,3 +61,6 @@ ax.grid(True, which="both", ls="--")
 plt.tight_layout()
 plt.savefig("crr_vs_mc.png", dpi=300)
 print("Graphique sauvegardé avec succès sous : crr_vs_mc.png")
+
+
+
