@@ -21,7 +21,6 @@
 
 int main() {
 
-    std::random_device rd;
     
     parameters par = {100.0L, 100.0L, 0.05L, 0.2L, 1.0L};
     Option option(par, typeoption::CALL);
@@ -40,7 +39,7 @@ int main() {
 
         file << "thread,M,price,standard_error,error,ci_low,ci_high,time\n";
 
-        const uint64_t seed = rd();
+        const uint64_t seed = 156;
 
         std::cout << std::fixed << std::setprecision(10);
 
